@@ -1,13 +1,42 @@
   
 import React from "react";
 import loginImg from "../../login.svg";
+import {BrowserRouter as Router,Route,
+  Redirect,Switch,withRouter} from 'react-router-dom';
+import { Dashboard } from "./dashboardtest";
 
-export class Login extends React.Component {
+
+class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: [
+        {
+            username :'',
+            password:''
+        },
+      ]
+    }
   }
 
+  handleNamechange=(event)=>{
+    this.setState({
+      username:event.target.value
+    })
+  }
+  handlePasswordChange = (event)=>{
+    this.setState({
+      password:event.target.value
+    })
+  }
+
+  handleSubmitform= (event)=>{
+    if(this.state.username === "amanshuklaass@gmail.com" && this.state.password === "Amanshukla@72"){
+      this.props.history.push('/dashboard');
+    }
+  }
   render() {
+    console.log(this.props.history)
     return (
       <div className="base-container" ref={this.props.containerRef}>
         <div className="header">Login</div>
@@ -16,18 +45,18 @@ export class Login extends React.Component {
             <img src={loginImg} />
           </div>
           <div className="form">
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input type="text" name="username" placeholder="username" />
+            <div className="form-group" onSubmit={this.handleSubmitform}>
+              <label htmlFor="username" >Username</label>
+              <input type="text" name="username" placeholder="username" onChange ={this.handleNamechange} />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="password" name="password" placeholder="password" />
+              <label htmlFor="password" >Password</label>
+              <input type="password" name="password" placeholder="password" onChange ={this.handlePasswordChange} />
             </div>
           </div>
         </div>
         <div className="footer">
-          <button type="button" className="btn">
+          <button type="button" className="btn" onClick={this.handleSubmitform}>
             Login
           </button>
         </div>
@@ -35,3 +64,5 @@ export class Login extends React.Component {
     );
   }
 }
+const Loginpage = withRouter(Login)
+export {Loginpage as Login} 
