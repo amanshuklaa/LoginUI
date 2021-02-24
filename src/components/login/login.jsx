@@ -3,9 +3,7 @@ import React from "react";
 import loginImg from "../../login.svg";
 import {BrowserRouter as Router,Route,
   Redirect,Switch,withRouter} from 'react-router-dom';
-import { Dashboard } from "./dashboardtest";
-
-
+  
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +29,7 @@ class Login extends React.Component {
   }
 
   handleSubmitform= (event)=>{
-    if(this.state.username === "amanshuklaass@gmail.com" && this.state.password === "Amanshukla@72"){
+    if(this.state.username === "amanshuklaass@gmail.com" && this.state.password === "a"){
       this.props.history.push('/dashboard');
     }
   }
