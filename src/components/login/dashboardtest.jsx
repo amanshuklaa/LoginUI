@@ -13,6 +13,8 @@ export class Dashboard extends React.Component {
                 quizEnd: false, //True if it's the last question
                 score: 0,      //the Score
                 disabled: true,
+                resofqz:'',
+                qst:''
             }
         
       }
@@ -87,33 +89,66 @@ export class Dashboard extends React.Component {
     render() {
         const {question, options, currentIndex, userAnswer, quizEnd} = this.state //get the current state       
         if(quizEnd) {
-            return (
-                <div>
-                    <h1>Game Over. Final score is {this.state.score} points</h1>
-                    <p>The correct Answers for the quiz are</p>
-                    <ul>
-                        {QuizData.map((item, index) => (
-                            <li className='options'
-                                key={index}>
-                                    {item.answer}
-                            </li>
-                     ))}
-                    </ul>
+            this.state.resofqz=
+                <div className="finalScore">
+                    <h1>Quiz Over. Final score is {this.state.score} points</h1>
                 </div>
-            )
+          
+        }else{
+            this.state.qst =   <div className="QuestionBox">
+            <div>
+              <h5 className="questionclass">{question}</h5>
+               <span className="questioncount">{`Question ${currentIndex+1} of ${QuizData.length}`}</span>
+               {options.map(option => (  //for each option, new paragraph
+                   <p key={option.id} 
+                   className={`options ${userAnswer === option ? "selected" : null}`}
+                   onClick= {() => this.checkAnswer(option)}>
+                       {option}
+                   </p>
+               ))}
+               {currentIndex < QuizData.length -1 &&  
+               // Next button only displays if the above is true
+               <button 
+                   className="nextquestionbtnclass" 
+                   disabled = {this.state.disabled}
+                   onClick = {this.nextQuestionHander}
+                >Next Question</button>
+                
+               }
+                {currentIndex === QuizData.length -1 &&
+                   <button
+                   className="ui inverted button"
+                   disabled = {this.state.disabled}
+                   onClick = {this.finishHandler}
+                   >Finish</button>
+                }
+           </div>
+   
+       
+
+ </div>
+            
         }
              
       return (
-      
+    
      <div className="dashboard">
          <div class="container">
              <img className="imgback" src={background} width="100%" height="" />    
-             <div className="QuestionBox">
-                  
+            {this.state.quizEnd ?
+            this.state.resofqz
+            :this.state.qst
+            }
+              </div>
              </div>
-        </div>
+        
+       
       
-     </div>
+     
+    
+    
+
+     
        
       
       );
