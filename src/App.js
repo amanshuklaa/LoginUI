@@ -4,7 +4,15 @@ import { Login, Register ,Dashboard,HomePage} from "./components/login/index";
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 class App extends React.Component {
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      
+    }
+  }
+  componentDidMount() {
+
+  }
   render() {
     return (
       <Router>
