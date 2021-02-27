@@ -3,17 +3,18 @@ import React from "react";
 import loginImg from "../../login.svg";
 import {BrowserRouter as Router,Route,
   Redirect,Switch,withRouter} from 'react-router-dom';
-  
+import {auth} from "../../firebase";
+// import firebaseDB from "../../firebase";
+import axios from 'axios';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {
             username :'',
-            password:''
-        },
-      ]
+            password:'',
+            loading: false,
+            loginstate:true,
     }
   }
 
@@ -28,10 +29,11 @@ class Login extends React.Component {
     })
   }
 
-  handleSubmitform= (event)=>{
-    if(this.state.username === "amanshuklaass@gmail.com" && this.state.password === "a"){
-      this.props.history.push('/dashboard');
-    }
+
+   handleSubmitform =async(event)=>{
+    await auth.signInWithEmailAndPassword(this.state.username, this.state.password)
+    this.props.history.push('/dashboard')
+    
   }
   render() {
     console.log(this.props.history)

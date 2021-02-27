@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.1",
     "delay": "^4.2.0",
+    "firebase": "^8.2.9",
     "g": "^2.0.1",
     "mdbreact": "^5.0.1",
     "react": "^16.8.6",
